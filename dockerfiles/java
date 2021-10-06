@@ -1,0 +1,3 @@
+FROM openjdk:latest
+WORKDIR /home/data/Lista1
+CMD java Lista1.java

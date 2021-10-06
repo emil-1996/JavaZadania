@@ -1,0 +1,32 @@
+version: "3.9"
+services:
+  java:
+    build:
+      dockerfile: ./dockerfiles/java
+      context: .
+    restart: always
+    volumes:
+      - ./data:/home/data
+    ports:
+      - '80:80'
+      - '443:443'
+    env_file:
+      - dockerEnv.env
+  db:
+    image: mariadb:latest
+    restart: always
+    env_file:
+      - dockerEnv.env
+    volumes:
+      - ~/docker/db:/var/lib/mysql
+    ports:
+      - "3306:3306"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    env_file:
+      - dockerEnv.env
+    ports:
+      - '8000:80'
+volumes:
+  db:
